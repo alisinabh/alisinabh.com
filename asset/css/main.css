@@ -7,6 +7,10 @@ body {
     color: #8e8e8e;
 }
 
+.c-nor {
+  color: #8e8e8e;
+}
+
 a, a:link, a:visited, a:hover {
     text-decoration: none;
     color: inherit;
@@ -17,7 +21,7 @@ a, a:link, a:visited, a:hover {
 }
 
 .c-fun {
-    color: #226fbd !important;
+    color: #5095da !important;
 }
 
 .c-mod {
@@ -42,8 +46,8 @@ a, a:link, a:visited, a:hover {
 }
 
 .soc-article {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
 #articles {
