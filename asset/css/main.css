@@ -7,16 +7,20 @@ body {
     color: #8e8e8e;
 }
 
-a:link, a:visited, a:hover{
-  text-decoration: none;
+a:link, a:visited, a:hover {
+    text-decoration: none;
 }
 
 .c-syn {
-    color: #9e1ba7 !important;
+    color: #b739bf !important;
+}
+
+.c-fun {
+    color: #226fbd !important;
 }
 
 .c-mod {
-    color: #226fbd !important;
+    color: #ecc058 !important;
 }
 
 .art-date {
@@ -36,13 +40,13 @@ a:link, a:visited, a:hover{
 }
 
 h1 {
-    font-weight: 600;
+    font-weight: 100;
     font-family: 'Inconsolata', monospace;
     font-size: 1.4em;
 }
 
 h3 {
-    font-weight: 600;
+    font-weight: 100;
     font-family: 'Inconsolata', monospace;
     text-transform: lowercase;
 }
@@ -55,9 +59,9 @@ article>p {
 
 article>h3 {
     margin-left: -2em;
-    color: #226fbd !important;
+    color: #5095da !important;
 }
 
 article>h3>span {
-    color: #9e1ba7 !important;
+    color: #b739bf !important;
 }
