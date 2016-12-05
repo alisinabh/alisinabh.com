@@ -7,8 +7,9 @@ body {
     color: #8e8e8e;
 }
 
-a:link, a:visited, a:hover {
+a, a:link, a:visited, a:hover {
     text-decoration: none;
+    color: inherit;
 }
 
 .c-syn {
@@ -35,8 +36,18 @@ a:link, a:visited, a:hover {
     font-size: .75em;
 }
 
+.soc-article>* {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.soc-article {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 #articles {
-    padding-left: 4em;
+    padding-left: 3.2em;
 }
 
 h1 {
@@ -53,12 +64,11 @@ h3 {
 
 article>p {
     font-size: 1.1em;
-    /*font-family: 'Merriweather', monospace;*/
     font-family: 'Inconsolata', monospace;
 }
 
 article>h3 {
-    margin-left: -2em;
+    margin-left: -1em;
     color: #5095da !important;
 }
 
