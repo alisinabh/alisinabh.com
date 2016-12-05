@@ -3,12 +3,12 @@ body {
     margin: 0 auto;
     font-family: Courier, Tahoma, Verdana, Arial, sans-serif;
     font-weight: 100;
-    background-color: #0a0a0a;
-    color: #8e8e8e;
+    background-color: #282c34;
+    color: #abb2bf;
 }
 
 .c-nor {
-  color: #8e8e8e;
+  color: #abb2bf;
 }
 
 a, a:link, a:visited, a:hover {
@@ -17,15 +17,19 @@ a, a:link, a:visited, a:hover {
 }
 
 .c-syn {
-    color: #b739bf !important;
+    color: #c678dd !important;
 }
 
 .c-fun {
-    color: #5095da !important;
+    color: #61afef !important;
+}
+
+.c-tup {
+    color: #49b0c1 !important;
 }
 
 .c-mod {
-    color: #ecc058 !important;
+    color: #d19a66  !important;
 }
 
 .art-date {
@@ -73,9 +77,9 @@ article>p {
 
 article>h3 {
     margin-left: -1em;
-    color: #5095da !important;
+    color: #61afef !important;
 }
 
 article>h3>span {
-    color: #b739bf !important;
+    color: #c678dd !important;
 }
