@@ -1,25 +1,20 @@
 <div id="articles">
-    <article id="0">
+<%= for post <- @posts do %>
+    <article id="<%= post.date %>">
         <h3>
             <span>def</span>
-            Developing_backend
+            <%= post.title %>
             <span>do</span>
             <i class="art-date"># Date: 12/5/16
                 <i>3:27</i>
             </i>
         </h3>
         <p>
-            welcome to alisinabh.com!<br>
-            this site is currently under construction and will be soon used as @alisinabh personal blog.<br>
-            <br>
-
-            Thank you for visiting here!<br>
-            will start soon ;)
-
-            <br><br>{<span class="c-mod">:</span><span class="c-tup">ok</span>, <span class="c-mod">:</span><span class="c-tup">feels_great</span>}
+          <%= raw(post.body) %>
         </p>
         <h3>
             <span>end</span>
         </h3>
     </article>
+<% end %>
 </div>

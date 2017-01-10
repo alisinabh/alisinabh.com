@@ -25,7 +25,7 @@ defmodule AlisinabhBlog.Database do
       Enum.reduce(files, [], fn(file, acc) ->
         {:ok, filedata} = Path.join(@repopath, file) |> File.read
         [timestamp, title | postbody] = filedata |> String.split("\n")
-        [{:post, String.to_integer(timestamp), title, Enum.join(postbody, "\n") |> Earmark.to_html} | acc]
+        [%{date: String.to_integer(timestamp), title: title, body: Enum.join(postbody, "\n") |> Earmark.to_html} | acc]
       end)
   end
 end

@@ -12,7 +12,7 @@
         <div style="margin: 15px 0 0 0; padding:0 15px;">
             <a href="https://alisinabh.com">
                 <h1 class="c-syn">defmodule
-                    <span class="c-mod">Com.Alisinabh</span>
+                    <span class="c-mod">Alisinabh.Blog</span>
                     do</h1>
             </a>
 
@@ -23,7 +23,7 @@
 
         <div id="mod-connect" style="margin: 4em 0 0 0; padding:0 15px;">
             <h1 class="c-syn">defmodule
-                <span class="c-mod">Connect</span>
+                <span class="c-mod">Alisinabh.Contact</span>
                 do</h1>
 
             <div id="articles">
