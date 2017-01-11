@@ -25,7 +25,19 @@ defmodule AlisinabhBlog.Database do
       Enum.reduce(files, [], fn(file, acc) ->
         {:ok, filedata} = Path.join(@repopath, file) |> File.read
         [timestamp, title | postbody] = filedata |> String.split("\n")
-        [%{date: String.to_integer(timestamp), title: title, body: Enum.join(postbody, "\n") |> Earmark.to_html} | acc]
+        {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
+        [%{id: timestamp, date: date, title: title, body: Enum.join(postbody, "\n") |> parse_alchemist_markdown} | acc]
       end)
+  end
+
+  defp parse_alchemist_markdown(text) do
+    text |> Earmark.to_html |> parse_mk_tuple
+  end
+
+  defp parse_mk_tuple(text) do
+    text
+     |> String.replace("T{:", "{<span class=\"c-mod\">:</span><span class=\"c-tup\">")
+     |> String.replace("T, :", "</span>, <span class=\"c-mod\">:</span><span class=\"c-tup\">")
+     |> String.replace("}T", "</span>}")
   end
 end

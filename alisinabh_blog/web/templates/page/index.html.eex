@@ -1,12 +1,12 @@
 <div id="articles">
 <%= for post <- @posts do %>
-    <article id="<%= post.date %>">
+    <article id="<%= post.id %>">
         <h3>
             <span>def</span>
             <%= post.title %>
             <span>do</span>
-            <i class="art-date"># Date: 12/5/16
-                <i>3:27</i>
+            <i class="art-date"># UTC Post Date: <%= "#{post.date.month}/#{post.date.day}/#{post.date.year}" %>
+                <i><%= "#{post.date.hour}:#{post.date.minute}" %></i>
             </i>
         </h3>
         <p>

@@ -87,3 +87,16 @@ article>h3 {
 article>h3>span {
     color: #c678dd !important;
 }
+
+code {
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #950dda;
+    border-style: solid;
+    padding: 0px 3px;
+}
+
+.elixir {
+  display: block;
+  padding: 10px!important;
+}
