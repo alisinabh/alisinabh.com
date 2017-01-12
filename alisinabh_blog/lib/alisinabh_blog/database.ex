@@ -31,10 +31,12 @@ defmodule AlisinabhBlog.Database do
   end
 
   defp parse_alchemist_markdown(text) do
-    text |> Earmark.to_html |> parse_mk_tuple
+    text
+     |> Earmark.to_html
+     |> parse_md_alchemist_tuple
   end
 
-  defp parse_mk_tuple(text) do
+  defp parse_md_alchemist_tuple(text) do
     text
      |> String.replace("T{:", "{<span class=\"c-mod\">:</span><span class=\"c-tup\">")
      |> String.replace("T, :", "</span>, <span class=\"c-mod\">:</span><span class=\"c-tup\">")
