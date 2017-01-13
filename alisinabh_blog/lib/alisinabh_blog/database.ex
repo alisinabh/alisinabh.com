@@ -31,7 +31,7 @@ defmodule AlisinabhBlog.Database do
   end
 
   def upsert_post(creationdate, title, postbody) do
-    {:ok file} = File.open("#{creationdate}.post", [:write])
+    {:ok, file} = Path.join(@repopath, "#{creationdate}.post") |> File.open([:write])
     :ok = IO.write(file, "#{creationdate}\n#{title}\n#{postbody}")
   end
 
