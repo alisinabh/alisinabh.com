@@ -1,0 +1,35 @@
+<style>
+.inp-login{
+  background: none;
+    border: none;
+    width: auto!important;
+    max-width: 54px;
+    color: white;
+}
+</style>
+<form action="/admin/login" method="post">
+  <div id="articles">
+      <article id="artlog">
+          <h3>
+              <span>def</span>
+              login(<input name="username" type="text" class="inp-login" placeholder="username" width="40px" />,
+              <input name="password" type="password" class="inp-login" placeholder="password" width="40px" />)
+              <span>do</span>
+          </h3>
+          <p style="white-space: pre-line; margin-top:-20px;">
+            <span class="c-syn">case</span> check_auth(username, password) <span class="c-syn">do</span>
+          &nbsp;&nbsp;{:ok, _} -> login_successful
+          &nbsp;&nbsp;{:unauthorized, message} -> show_message(msg)
+          &nbsp;&nbsp;{:error, _} -> show_internal_error
+            <span class="c-syn">end</span>
+          </p>
+          <h3>
+              <span>end</span>
+          </h3>
+      </article>
+  </div>
+  <input type="submit"
+       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+       tabindex="-1" />
+   <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
+</form>
