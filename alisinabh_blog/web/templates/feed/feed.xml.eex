@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>alisinabh</title>
+    <description>@alisinabh blog about programming and elixir-lang</description>
+    <link>https://alisinabh.com</link>
+    <%= for entry <- @posts do %>
+      <item>
+        <title>
+          <![CDATA[<%= entry.title %>]]>
+        </title>
+        <link>https://alisinabh.com/post/<%= DateTime.to_unix(entry.date, :millisecond) %></link>
+        <description>
+          <![CDATA[<%= entry.body %>]]>
+        </description>
+        <pubDate><%= date_format(entry.date)  %></pubDate>
+        <guid isPermaLink="true">https://alisinabh.com/post/<%= DateTime.to_unix(entry.date, :millisecond) %></guid>
+      </item>
+    <% end %>
+  </channel>
+</rss>

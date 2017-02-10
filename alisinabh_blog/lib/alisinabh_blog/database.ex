@@ -16,23 +16,31 @@ defmodule AlisinabhBlog.Database do
   ## Parameters:
     - limit: number of posts to return
   """
-  def get_new_posts(limit \\ 10) do
+  def get_new_posts(limit \\ 10, skip \\ 0) do
     {:ok, files} = File.ls(@repopath)
 
     files = files |>
       Enum.sort
 
-      Enum.reduce(files, [], fn(file, acc) ->
-        {:ok, filedata} = Path.join(@repopath, file) |> File.read
-        [timestamp, title | postbody] = filedata |> String.split("\n")
-        {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
-        [%{id: timestamp, date: date, title: title, body: Enum.join(postbody, "\n") |> parse_alchemist_markdown} | acc]
+    Enum.reduce(files, [], fn(file, acc) ->
+        [get_post_in_file(file) | acc]
       end)
+  end
+
+  def get_post_by_date(date) do
+    get_post_in_file("#{date}.post", true)
+  end
+
+  def get_post_in_file(file, complete \\ false) do
+    {:ok, filedata} = Path.join(@repopath, file ) |> File.read
+    [timestamp, title | postbody] = filedata |> String.split("\n")
+    {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
+    %{id: timestamp, date: date, title: title, body: Enum.join(postbody, "\n") |> parse_alchemist_markdown}
   end
 
   def upsert_post(creationdate, title, postbody) do
     {:ok, file} = Path.join(@repopath, "#{creationdate}.post") |> File.open([:write])
-    :ok = IO.write(file, "#{creationdate}\n#{title}\n#{postbody}")
+    IO.write(file, "#{creationdate}\n#{title}\n#{postbody}")
   end
 
   defp parse_alchemist_markdown(text) do

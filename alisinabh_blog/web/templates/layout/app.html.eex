@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>"/>
         <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-        <meta name="description" content="Alisina Bahadori personal blog">
+        <meta name="description" content="@alisinabh blog about programming and elixir-lang">
         <meta name="author" content="Alisina Bahadori (@alisinabh)">
     </head>
     <body>

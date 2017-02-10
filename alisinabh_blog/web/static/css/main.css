@@ -8,7 +8,7 @@ body {
 }
 
 .c-nor {
-  color: #abb2bf;
+    color: #abb2bf;
 }
 
 a, a:link, a:visited, a:hover {
@@ -50,8 +50,8 @@ a, a:link, a:visited, a:hover {
 }
 
 .soc-article {
-  margin-top: 7px;
-  margin-bottom: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 #articles {
@@ -97,6 +97,30 @@ code {
 }
 
 .elixir {
+    display: block;
+    padding: 10px!important;
+}
+
+.btn {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 9px;
+    padding: 1px 6px;
+    border-color: #df89f9;
+    background: none;
+    color: #df89f9;
+}
+
+.btn-large {
+  font-size: 20px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
   display: block;
-  padding: 10px!important;
+  margin: 5px 15px;
 }

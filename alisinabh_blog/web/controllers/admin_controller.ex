@@ -1,5 +1,6 @@
 defmodule AlisinabhBlog.AdminController do
   use AlisinabhBlog.Web, :controller
+  import AlisinabhBlog.Database
 
   def login(conn, _params) do
     case get_session(conn, :auth) do
@@ -21,6 +22,42 @@ defmodule AlisinabhBlog.AdminController do
     end
   end
 
+  def posts(conn, _params) do
+    case check_auth(conn) do
+      :ok ->
+        render conn, "posts.html", posts: get_new_posts(20), last_item: 1
+      _ -> conn
+    end
+  end
+
+  def new(conn, _params) do
+    case check_auth(conn) do
+      :ok ->
+        render conn, "new.html"
+      _ -> conn
+    end
+  end
+
+  def save_post(conn, %{"title" => title, "content" => content}) do
+    :ok = upsert_post(:os.system_time(:millisecond), title, content)
+    redirect conn, to: "/admin/posts"
+  end
+
+  def save_post(conn, %{"title" => title, "content" => content, "creationdate" => creationdate}) do
+    :ok = upsert_post(creationdate, title, content)
+    redirect conn, to: "/admin/posts"
+  end
+
+  defp check_auth(conn) do
+    case get_session(conn, :auth) do
+      true ->
+        :ok
+      _ ->
+        conn = conn |> put_status(401)
+        redirect conn, to: "/admin/"
+        :unauth
+    end
+  end
   # def new(conn, _params) do
   #   changeset = Admin.changeset(%Admin{})
   #   render(conn, "new.html", changeset: changeset)

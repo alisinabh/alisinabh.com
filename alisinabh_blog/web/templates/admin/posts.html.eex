@@ -1,11 +1,14 @@
+<div>
+  <a href="/admin/new" class="btn">New Post +</a>
+</div>
+
+
 <div id="articles">
 <%= for post <- @posts do %>
     <article id="<%= post.id %>">
         <h3>
             <span>def</span>
-            <a href="/post/<%= DateTime.to_unix(post.date, :millisecond) %>/<%= String.replace post.title, " ", "_" %>">
-              <%= String.replace post.title, " ", "_" %>
-            </a>
+            <a href="/admin/edit/<%= DateTime.to_unix(post.date, :millisecond) %>"><%= String.replace post.title, " ", "_" %></a>
             <span>do</span>
             <i class="art-date"># UTC Pub Date: <%= "#{post.date.month}/#{post.date.day}/#{post.date.year}" %>
                 <i><%= "#{post.date.hour}:#{post.date.minute}" %></i>

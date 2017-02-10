@@ -1,10 +1,15 @@
 <h2>New post</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: admin_path(@conn, :create) %>
-
-<%= link "Back", to: admin_path(@conn, :index) %>
-
 <form action="" method="post">
+  <div class="row">
+    <input type="text" name="title" placeholder="Title..." />
+  </div>
+  <div class="row">
+    <textarea name="content" style="width:100%; min-height: 200px;"></textarea>
+  </div>
+  <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
 
+  <div class="row"><input type="submit" value="Save" class="btn btn-large btn-block" /></div>
 </form>
+
+<a class="btn" href="/admin/posts">Back</a>
