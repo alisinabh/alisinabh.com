@@ -10,4 +10,4 @@ it mainly contains posts about
 Front end of alisinabh.com is similar to Elixir syntax (of course, my favorite language so far). its all simple, designed and developed by myself
 
 ## Back-End
-Back end of alisinabh.com is going to serve on top of ~~Phoenix Framework (a powerful web framework based on plug)~~ [plug](https://hex.pm/packages/plug)
+Back end of alisinabh.com is going to serve on top of Phoenix Framework (a powerful web framework based on plug)
