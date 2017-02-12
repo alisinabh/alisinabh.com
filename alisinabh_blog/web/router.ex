@@ -24,6 +24,8 @@ defmodule AlisinabhBlog.Router do
     get "/admin/posts", AdminController, :posts
     get "/admin/new", AdminController, :new
     post "/admin/new", AdminController, :save_post
+    get "/admin/edit/:date", AdminController, :edit
+    post "/admin/edit/:date", AdminController, :save_post
 
     get "/feed", FeedController, :feed
   end

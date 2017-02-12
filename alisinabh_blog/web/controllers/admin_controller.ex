@@ -33,19 +33,36 @@ defmodule AlisinabhBlog.AdminController do
   def new(conn, _params) do
     case check_auth(conn) do
       :ok ->
-        render conn, "new.html"
+        render conn, "new.html", date: 0, title: "", content: ""
+      _ -> conn
+    end
+  end
+  
+  def save_post(conn, %{"date" => date, "title" => title, "content" => content}) do
+    case check_auth(conn) do
+      :ok ->
+        :ok = upsert_post(date, title, content)
+        redirect conn, to: "/admin/posts"
       _ -> conn
     end
   end
 
   def save_post(conn, %{"title" => title, "content" => content}) do
-    :ok = upsert_post(:os.system_time(:millisecond), title, content)
-    redirect conn, to: "/admin/posts"
+     case check_auth(conn) do
+       :ok ->
+         :ok = upsert_post(:os.system_time(:millisecond), title, content)
+         redirect conn, to: "/admin/posts"
+       _ -> conn
+     end
   end
-
-  def save_post(conn, %{"title" => title, "content" => content, "creationdate" => creationdate}) do
-    :ok = upsert_post(creationdate, title, content)
-    redirect conn, to: "/admin/posts"
+  
+  def edit(conn, %{"date" => date}) do
+     case check_auth(conn) do
+        :ok ->
+          post = get_post_by_date(date, true)
+          render conn, "new.html", title: post.title, content: post.body, date: date
+        _ -> conn
+      end
   end
 
   defp check_auth(conn) do
@@ -58,6 +75,7 @@ defmodule AlisinabhBlog.AdminController do
         :unauth
     end
   end
+  
   # def new(conn, _params) do
   #   changeset = Admin.changeset(%Admin{})
   #   render(conn, "new.html", changeset: changeset)

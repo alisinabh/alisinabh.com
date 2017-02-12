@@ -20,22 +20,30 @@ defmodule AlisinabhBlog.Database do
     {:ok, files} = File.ls(@repopath)
 
     files = files |>
-      Enum.sort
+      Enum.sort |>
+      Enum.drop(skip) |>
+      Enum.take(limit)
 
     Enum.reduce(files, [], fn(file, acc) ->
         [get_post_in_file(file) | acc]
       end)
   end
 
-  def get_post_by_date(date) do
-    get_post_in_file("#{date}.post", true)
+  def get_post_by_date(date, md \\ false) do
+    get_post_in_file("#{date}.post", true, md)
   end
 
-  def get_post_in_file(file, complete \\ false) do
+  def get_post_in_file(file, complete \\ false, md \\ false) do
     {:ok, filedata} = Path.join(@repopath, file ) |> File.read
     [timestamp, title | postbody] = filedata |> String.split("\n")
     {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
-    %{id: timestamp, date: date, title: title, body: Enum.join(postbody, "\n") |> parse_alchemist_markdown}
+    post = %{id: timestamp, date: date, title: title, body: nil}
+    
+    if md do
+      %{post | body: postbody}
+    else
+      %{post | body: Enum.join(postbody, "\n") |> parse_alchemist_markdown}
+    end
   end
 
   def upsert_post(creationdate, title, postbody) do

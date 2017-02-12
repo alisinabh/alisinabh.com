@@ -1,15 +1,18 @@
 <h2>New post</h2>
 
-<form action="" method="post">
+<form method="post">
   <div class="row">
-    <input type="text" name="title" placeholder="Title..." />
+    <input type="text" value="<%= @title %>" name="title" placeholder="Title..." />
   </div>
   <div class="row">
-    <textarea name="content" style="width:100%; min-height: 200px;"></textarea>
+    <textarea name="content" style="width:100%; min-height: 200px;"><%= @content %></textarea>
   </div>
   <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
 
   <div class="row"><input type="submit" value="Save" class="btn btn-large btn-block" /></div>
+  <%= if @date > 0 do %>
+    <input type="hidden" name="date" value="<%= @date %>">
+  <% end %>
 </form>
 
 <a class="btn" href="/admin/posts">Back</a>
