@@ -7,6 +7,6 @@ defmodule AlisinabhBlog.FeedController do
     conn
      |> put_layout(:none)
      |> put_resp_content_type("application/xml")
-     |> render "feed.xml", posts: posts
+     |> render("feed.xml", posts: posts)
   end
 end
