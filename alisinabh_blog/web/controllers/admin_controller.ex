@@ -57,12 +57,21 @@ defmodule AlisinabhBlog.AdminController do
   end
   
   def edit(conn, %{"date" => date}) do
-     case check_auth(conn) do
-        :ok ->
-          post = get_post_by_date(date, true)
-          render conn, "new.html", title: post.title, content: post.body, date: date
-        _ -> conn
-      end
+    case check_auth(conn) do
+      :ok ->
+        post = get_post_by_date(date, true)
+        render conn, "new.html", title: post.title, content: post.body, date: date
+      _ -> conn
+    end
+  end
+
+  def delete_post(conn, %{"date" => date}) do
+    case check_auth(conn) do
+      :ok ->
+        :ok = remove_post(date)
+        redirect conn, to: "/admin/posts"
+      _ -> conn
+    end
   end
 
   defp check_auth(conn) do

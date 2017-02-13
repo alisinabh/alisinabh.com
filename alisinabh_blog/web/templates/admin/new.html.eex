@@ -12,6 +12,10 @@
   <div class="row"><input type="submit" value="Save" class="btn btn-large btn-block" /></div>
   <%= if @date > 0 do %>
     <input type="hidden" name="date" value="<%= @date %>">
+    <div class="row">
+      <br><br>
+      <a class="btn btn-large btn-block" href="/admin/deletePost/<%= @date %>">Delete Post? yes</a>
+    </div>
   <% end %>
 </form>
 

@@ -51,6 +51,10 @@ defmodule AlisinabhBlog.Database do
     IO.write(file, "#{creationdate}\n#{title}\n#{postbody}")
   end
 
+  def remove_post(date) do
+    Path.join(@repopath, "#{date}.post") |> File.rm
+  end
+
   defp parse_alchemist_markdown(text) do
     text
      |> Earmark.to_html

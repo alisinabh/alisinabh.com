@@ -16,7 +16,7 @@ defmodule AlisinabhBlog.Router do
   scope "/", AlisinabhBlog do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", PageContproller, :index
     get "/post/:date/*path", PostController, :view_post
     
     get "/admin", AdminController, :login
@@ -26,6 +26,7 @@ defmodule AlisinabhBlog.Router do
     post "/admin/new", AdminController, :save_post
     get "/admin/edit/:date", AdminController, :edit
     post "/admin/edit/:date", AdminController, :save_post
+    get "/admin/deletePost/:date", AdminController, :delete_post
 
     get "/feed", FeedController, :feed
   end
