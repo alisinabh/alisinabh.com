@@ -4,6 +4,8 @@
 /tmp
 /node_modules
 
+/config/prod.secret.exs
+
 /installer/_build
 /installer/tmp
 
