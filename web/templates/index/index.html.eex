@@ -1,0 +1,26 @@
+<div id="articles">
+<%= for post <- @posts do %>
+    <article id="<%= post.id %>">
+        <h3>
+            <span>def</span>
+            <a href="/post/<%= DateTime.to_unix(post.date, :millisecond) %>/<%= String.replace post.title, " ", "_" %>">
+              <%= String.replace post.title, " ", "_" %>
+            </a>
+            <span>do</span>
+            <i class="art-date"># UTC Pub Date: <%= "#{post.date.month}/#{post.date.day}/#{post.date.year}" %>
+                <i><%= "#{post.date.hour}:#{post.date.minute}" %></i>
+            </i>
+        </h3>
+        <p>
+          <%= raw(post.body) %>
+        </p>
+        <h3>
+            <span>end</span>
+        </h3>
+    </article>
+<% end %>
+</div>
+
+<%= if @last_item != nil do %>
+  <a class="c-syn" href="?lastId=<%= @last_item %>">load_more()</a>
+<% end %>
