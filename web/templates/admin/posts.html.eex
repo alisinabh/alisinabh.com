@@ -27,3 +27,5 @@
 <%= if @last_item != 0 do %>
   <a class="c-syn" href="?lastId=<%= @last_item %>">load_more()</a>
 <% end %>
+<br><br>
+<a class="c-syn" href="/admin/logout">adios()</a>

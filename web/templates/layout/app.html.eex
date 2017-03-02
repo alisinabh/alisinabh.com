@@ -1,6 +1,6 @@
 <html lang="en">
     <head>
-        <title>alisinabh</title>
+        <title><%= @title %> - alisinabh</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>"/>
         <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
@@ -68,6 +68,5 @@
             </div>
             <h1 class="c-syn">end</h1>
         </div>
-        <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     </body>
 </html>

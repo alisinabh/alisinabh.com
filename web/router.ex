@@ -17,14 +17,15 @@ defmodule Alisinabh.Router do
     pipe_through :browser # Use the default browser stack
 
     # index
-    get "/", IndexController, :index
+    get "/", PostController, :news
 
     # /post
-    get "/post/:date/*path", IndexController, :view_post
+    get "/post/:date/*path", PostController, :view_post
 
     # /admin
     get "/admin", AdminController, :login
     post "/admin/login", AdminController, :login_check
+    get "/admin/logout", AdminController, :logout
 
     get "/admin/posts", AdminController, :posts
 

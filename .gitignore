@@ -9,4 +9,6 @@
 /installer/_build
 /installer/tmp
 
+/blogrepo
+
 erl_crash.dump

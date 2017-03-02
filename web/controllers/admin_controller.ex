@@ -8,7 +8,7 @@ defmodule Alisinabh.AdminController do
         redirect conn, to: "/admin/posts"
       _ ->
         conn = conn |> put_status(401)
-        render(conn, "login.html")
+        render conn, "login.html", title: "Login"
     end
   end
 
@@ -22,10 +22,16 @@ defmodule Alisinabh.AdminController do
     end
   end
 
+  def logout(conn, _params) do
+    conn = conn |> put_session(:auth, false)
+    redirect conn, to: "/"
+  end
+
   def posts(conn, _params) do
     case check_auth(conn) do
       :ok ->
-        render conn, "posts.html", posts: get_new_posts(20), last_item: 1
+        posts =  get_new_posts(20)
+        render conn, "posts.html", posts: posts, last_item: Alisinabh.Helpers.get_last_post_id(posts), title: "Admin: List of posts"
       _ -> conn
     end
   end
@@ -33,7 +39,7 @@ defmodule Alisinabh.AdminController do
   def new(conn, _params) do
     case check_auth(conn) do
       :ok ->
-        render conn, "new.html", date: 0, title: "", content: ""
+        render conn, "new.html", date: 0, title: "", content: "", title: "Admin: New post"
       _ -> conn
     end
   end
@@ -60,7 +66,7 @@ defmodule Alisinabh.AdminController do
     case check_auth(conn) do
       :ok ->
         post = get_post_by_date(date, true)
-        render conn, "new.html", title: post.title, content: post.body, date: date
+        render conn, "new.html", title: post.title, content: post.body, date: date, title: "Admin: Edit post"
       _ -> conn
     end
   end

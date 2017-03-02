@@ -57,7 +57,7 @@ defmodule Alisinabh.Database do
 
   defp parse_alchemist_markdown(text) do
     text
-     |> Earmark.to_html
+     |> Earmark.as_html!
      |> parse_md_alchemist_tuple
   end
 
