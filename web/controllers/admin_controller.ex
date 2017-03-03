@@ -2,6 +2,9 @@ defmodule Alisinabh.AdminController do
   use Alisinabh.Web, :controller
   import Alisinabh.Database
 
+  @auth_user Application.get_env(:alisinabh, :author_user)
+  @auth_pass Application.get_env(:alisinabh, :author_pass)
+
   def login(conn, _params) do
     case get_session(conn, :auth) do
       true ->
@@ -14,7 +17,7 @@ defmodule Alisinabh.AdminController do
 
   def login_check(conn, %{"username" => username, "password" => password}) do
     case {username, password} do
-      {"admin", "admin"} -> conn = conn
+      {@auth_user, @auth_pass} -> conn = conn
         |> put_session(:auth, true)
         redirect conn, to: "/admin"
       _ -> conn = conn |> put_status(403)
