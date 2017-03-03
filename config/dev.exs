@@ -15,6 +15,9 @@ config :alisinabh, Alisinabh.Endpoint,
 
 config :alisinabh, repo_path: "blogrepo/"
 
+config :alisinabh, author_user: "admin"
+config :alisinabh, author_pass: "admin2"
+
 # Watch static and templates for browser reloading.
 config :alisinabh, Alisinabh.Endpoint,
   live_reload: [

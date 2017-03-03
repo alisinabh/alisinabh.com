@@ -7,8 +7,7 @@
               <%= String.replace post.title, " ", "_" %>
             </a>
             <span>do</span>
-            <i class="art-date"># UTC Pub Date: <%= "#{post.date.month}/#{post.date.day}/#{post.date.year}" %>
-                <i><%= "#{post.date.hour}:#{post.date.minute}" %></i>
+            <i class="art-date"># <%= "#{post.date.year}-#{post.date.month}-#{post.date.day}T#{post.date.hour}:#{post.date.minute}:#{post.date.second}Z" %>
             </i>
         </h3>
         <p>
