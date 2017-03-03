@@ -17,7 +17,7 @@ defmodule Alisinabh.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Alisinabh, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :edeliver, :phoenix_live_reload]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :edeliver, :phoenix_live_reload, :earmark, :timex]]
   end
 
   # Specifies which paths to compile per environment.

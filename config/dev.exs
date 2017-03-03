@@ -13,6 +13,7 @@ config :alisinabh, Alisinabh.Endpoint,
   check_origin: false,
   watchers: []
 
+config :alisinabh, repo_path: "blogrepo/"
 
 # Watch static and templates for browser reloading.
 config :alisinabh, Alisinabh.Endpoint,
