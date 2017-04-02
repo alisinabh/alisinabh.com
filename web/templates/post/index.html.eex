@@ -13,6 +13,9 @@
         <p>
           <%= raw(post.body) %>
         </p>
+        <a class="c-fun" href="/post/<%= DateTime.to_unix(post.date, :millisecond) %>/<%= String.replace post.title, " ", "_" %>#comment">
+          comments(<span class="disqus-comment-count" data-disqus-identifier="post:<%= post.id %>"></span>)
+        </a>
         <h3>
             <span>end</span>
         </h3>
@@ -23,3 +26,5 @@
 <%= if @last_item != nil do %>
   <a class="c-syn" href="?lastId=<%= @last_item %>">load_more()</a>
 <% end %>
+
+<script id="dsq-count-scr" src="//alisinabh-com-1.disqus.com/count.js" async></script>
