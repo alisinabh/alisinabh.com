@@ -42,12 +42,12 @@ defmodule Alisinabh.AdminController do
   def new(conn, _params) do
     case check_auth(conn) do
       :ok ->
-        render conn, "new.html", date: 0, title: "", content: "", title: "Admin: New post"
+        render conn, "new.html", date: 0, post_title: "", content: "", title: "Admin: New post"
       _ -> conn
     end
   end
 
-  def save_post(conn, %{"date" => date, "title" => title, "content" => content}) do
+  def save_post(conn, %{"date" => date, "post_title" => title, "content" => content}) do
     case check_auth(conn) do
       :ok ->
         :ok = upsert_post(date, title, content)
@@ -56,7 +56,7 @@ defmodule Alisinabh.AdminController do
     end
   end
 
-  def save_post(conn, %{"title" => title, "content" => content}) do
+  def save_post(conn, %{"post_title" => title, "content" => content}) do
      case check_auth(conn) do
        :ok ->
          :ok = upsert_post(:os.system_time(:millisecond), title, content)
@@ -69,7 +69,7 @@ defmodule Alisinabh.AdminController do
     case check_auth(conn) do
       :ok ->
         post = get_post_by_date(date, true)
-        render conn, "new.html", title: post.title, content: post.body, date: date, title: "Admin: Edit post"
+        render conn, "new.html", post_title: post.title, content: post.body, date: date, title: "Admin: Edit post"
       _ -> conn
     end
   end
