@@ -7,16 +7,37 @@
         <meta name="description" content="@alisinabh Tech blog">
         <meta name="author" content="Alisina Bahadori">
         <meta name="keywords" content=", tech, devops, elixir, cloud, geeky stuff">
-        <link rel="alternate" type="application/rss+xml" title="RSS Feed for alisinabh.com" href="http://alisinabh.com/feed" />
-        <meta property="og:description" content="@alisinabh blog about my tech life as a programmer and my experiences.">
-        <meta property="og:type" content="blog">
-        <meta property="og:title" content="Alisinabh Tech blog">
-        <meta property="og:url" content="/">
+
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for alisinabh.com" href="https://alisinabh.com/feed" />
+        <%= case assigns[:og_data] do %>
+          <% {:ogv1, type, title, description, url} -> %>
+            <meta property="og:description" content="<%= description %>">
+            <meta property="og:type" content="<%= type %>">
+            <meta property="og:title" content="<%= title %>">
+            <meta property="og:url" content="<%= url %>">
+
+            <meta name="twitter:card" content="summary">
+            <meta name="twitter:title" content="<%= title %>">
+            <meta name="twitter:description" content="<%= description %>">
+            <meta name="twitter:creator" content="@alisinabh">
+          <% _ -> %>
+            <meta property="og:description" content="@alisinabh blog about my tech life as a programmer and my experiences.">
+            <meta property="og:type" content="blog">
+            <meta property="og:title" content="Alisinabh Tech blog">
+            <meta property="og:url" content="/">
+
+            <meta name="twitter:card" content="summary">
+            <meta name="twitter:title" content="@alisinabh Tech Blog">
+            <meta name="twitter:description" content="@alisinabh blog about my tech life as a programmer.">
+            <meta name="twitter:creator" content="@alisinabh">
+        <% end %>
+
+
         <meta property="og:site_name" content="Alisinabh Tech blog">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="@alisinabh Tech Blog">
-        <meta name="twitter:description" content="@alisinabh blog about my tech life as a programmer.">
-        <meta name="twitter:creator" content="@alisinabh">
+        <meta property="og:locale" content="en_US" />
+
+        <meta property="og:image" content="/og_image.png">
+        <meta name="twitter:image" content="/og_image.png" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -28,11 +49,17 @@
     <body>
 
         <div style="margin: 15px 0 0 0; padding:0 15px;">
+
             <a href="https://alisinabh.com">
+              <div class="pull-right">
+                  <img src="/logo.png" alt="alisinabh.com">
+              </div>
                 <h1 class="c-syn">defmodule
                     <span class="c-mod">Alisinabh.Blog</span>
-                    do</h1>
+                    do
+                  </h1>
             </a>
+
 
             <%= render @view_module, @view_template, assigns %>
 

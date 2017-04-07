@@ -7,6 +7,10 @@
   <div class="row">
     <textarea name="content" style="width:100%; min-height: 200px;"><%= @content %></textarea>
   </div>
+  <div class="row">
+    <label for="is_published" value="Published?" />
+    <input type="checkbox" name="is_published" value="@is_published" />
+  </div>
   <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
 
   <div class="row"><input type="submit" value="Save" class="btn btn-large btn-block" /></div>
