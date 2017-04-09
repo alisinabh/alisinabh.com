@@ -3,7 +3,7 @@
     <article id="<%= post.id %>">
         <h3>
             <span>def</span>
-            <a href="/post/<%= DateTime.to_unix(post.date, :millisecond) %>/<%= String.replace post.title, " ", "_" %>">
+            <a href="/post/<%= DateTime.to_unix(post.date, :millisecond) %>/<%= Alisinabh.Helpers.urlify_string(post.title) %>">
               <%= String.replace post.title, " ", "_" %>
             </a>
             <span>do</span>
