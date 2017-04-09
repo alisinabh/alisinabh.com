@@ -47,19 +47,19 @@ defmodule Alisinabh.AdminController do
     end
   end
 
-  def save_post(conn, %{"date" => date, "post_title" => title, "content" => content, "is_published" => is_published}) do
+  def save_post(conn, %{"date" => date, "post_title" => title, "content" => content}) do
     case check_auth(conn) do
       :ok ->
-        :ok = upsert_post(date, title, content, is_published)
+        :ok = upsert_post(date, title, content, true)
         redirect conn, to: "/admin/posts"
       _ -> conn
     end
   end
 
-  def save_post(conn, %{"post_title" => title, "content" => content, "is_published" => is_published}) do
+  def save_post(conn, %{"post_title" => title, "content" => content}) do
      case check_auth(conn) do
        :ok ->
-         :ok = upsert_post(:os.system_time(:millisecond), title, content, is_published)
+         :ok = upsert_post(:os.system_time(:millisecond), title, content, true)
          redirect conn, to: "/admin/posts"
        _ -> conn
      end

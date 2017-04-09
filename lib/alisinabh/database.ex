@@ -23,29 +23,34 @@ defmodule Alisinabh.Database do
     - limit: number of posts to return
   """
   def get_new_posts(limit \\ 10, skip \\ 0, drafts \\ false) do
-    {:ok, files} = File.ls(@repopath)
+    {:ok, files_ondisk} = File.ls(@repopath)
 
-    files2 = case drafts do
-      true ->
-        files
-      _ ->
-        Enum.reduce(files, fn(file, acc) ->
-          if String.starts_with?(file, "d") do
-            acc
-          else
-            [file | acc]
-          end
-        end)
+    files = if drafts do
+        files_ondisk
+      else
+        remove_drafts(files_ondisk, [])
     end
 
-    files = files |>
-      Enum.sort |>
-      Enum.drop(skip) |>
-      Enum.take(limit)
+    files_final = files
+      |> Enum.sort
+      |> Enum.drop(skip)
+      |> Enum.take(limit)
 
-    Enum.reduce(files, [], fn(file, acc) ->
+    Enum.reduce(files_final, [], fn(file, acc) ->
         [get_post_in_file(Path.join(@repopath, file)) | acc]
       end)
+  end
+
+  defp remove_drafts([file | tail], acc) do
+    if String.starts_with?(file, "d") do
+      acc
+    else
+      remove_drafts(tail, [file | acc])
+    end
+  end
+
+  defp remove_drafts([], acc) do
+    acc
   end
 
   @doc """
@@ -62,11 +67,13 @@ defmodule Alisinabh.Database do
     {:ok, filedata} = File.read(file)
     [timestamp, title | postbody] = filedata |> String.split("\n")
     {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
-    post = %{id: timestamp, date: date, title: title, body: nil}
 
-    if file |> Path.basename |> String.starts_with?("d") do
-      post = %{post | title: "DRAFT: #{post.title}"}
-    end
+    post =
+      if file |> Path.basename |> String.starts_with?("d") do
+        %{id: timestamp, date: date, title: "DRAFT: #{title}", body: nil, is_draft: true}
+      else
+        %{id: timestamp, date: date, title: title, body: nil, is_draft: true}
+      end
 
     if md do
       %{post | body: postbody}
