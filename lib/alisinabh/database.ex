@@ -86,7 +86,7 @@ defmodule Alisinabh.Database do
   Inserts or updates a post
   """
   def upsert_post(creationdate, title, postbody, publish) do
-    {:ok, file} = Helpers.post_path_by_date(creationdate, publish) |> File.open([:write])
+    {:ok, file} = Helpers.post_path_by_date(creationdate, publish) |> File.open([:write, :utf8])
     IO.write(file, "#{creationdate}\n#{title}\n#{postbody}")
   end
 
