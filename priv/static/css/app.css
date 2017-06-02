@@ -12,6 +12,10 @@ img {
   width: 90%;
 }
 
+p > a:link, a:visited {
+  color: #c678dd!important;
+}
+
 .c-nor {
     color: #abb2bf;
 }
