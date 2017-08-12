@@ -12,7 +12,7 @@ defmodule Alisinabh.PostController do
     post = get_post_by_date(date)
 
     og_data = {:ogv1, "article", post.title,
-      Regex.replace(~r/<[^>]*>/, post.body, "") |> String.replace("\n", "") |> String.slice(0, 70), "https://alisinabh.com/post/#{post.date}/#{Alisinabh.Helpers.urlify_string(post.title)}"}
+      (Regex.replace(~r/<[^>]*>/, post.body, "") |> String.replace("\n", "") |> String.slice(0, 152)) <> "...", "https://alisinabh.com/post/#{post.date}/#{Alisinabh.Helpers.urlify_string(post.title)}"}
 
     render conn, "post.html", post: post, title: post.title, og_data: og_data
   end
