@@ -1,0 +1,14 @@
+/_build
+/deps
+/doc
+/tmp
+/node_modules
+
+/config/prod.secret.exs
+
+/installer/_build
+/installer/tmp
+
+/blogrepo
+
+erl_crash.dump

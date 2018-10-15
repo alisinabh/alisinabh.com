@@ -25,25 +25,27 @@ defmodule Alisinabh.Database do
   def get_new_posts(limit \\ 10, skip \\ 0, drafts \\ false) do
     {:ok, files_ondisk} = File.ls(@repopath)
 
-    files = if drafts do
+    files =
+      if drafts do
         files_ondisk
       else
         remove_drafts(files_ondisk, [])
-    end
+      end
 
-    files_final = files
-      |> Enum.sort
+    files_final =
+      files
+      |> Enum.sort()
       |> Enum.drop(skip)
       |> Enum.take(limit)
 
-    Enum.reduce(files_final, [], fn(file, acc) ->
-        [get_post_in_file(Path.join(@repopath, file)) | acc]
-      end)
+    Enum.reduce(files_final, [], fn file, acc ->
+      [get_post_in_file(Path.join(@repopath, file)) | acc]
+    end)
   end
 
   defp remove_drafts([file | tail], acc) do
     if String.starts_with?(file, "d") do
-      acc
+      remove_drafts(tail, acc)
     else
       remove_drafts(tail, [file | acc])
     end
@@ -66,10 +68,10 @@ defmodule Alisinabh.Database do
   def get_post_in_file(file, complete \\ false, md \\ false) do
     {:ok, filedata} = File.read(file)
     [timestamp, title | postbody] = filedata |> String.split("\n")
-    {:ok, date} = timestamp |> String.to_integer |> DateTime.from_unix(:milliseconds)
+    {:ok, date} = timestamp |> String.to_integer() |> DateTime.from_unix(:milliseconds)
 
     post =
-      if file |> Path.basename |> String.starts_with?("d") do
+      if file |> Path.basename() |> String.starts_with?("d") do
         %{id: timestamp, date: date, title: "DRAFT: #{title}", body: nil, is_draft: true}
       else
         %{id: timestamp, date: date, title: title, body: nil, is_draft: true}
@@ -99,14 +101,14 @@ defmodule Alisinabh.Database do
 
   defp parse_alchemist_markdown(text) do
     text
-     |> Earmark.as_html!
-     |> parse_md_alchemist_tuple
+    |> Earmark.as_html!()
+    |> parse_md_alchemist_tuple
   end
 
   defp parse_md_alchemist_tuple(text) do
     text
-     |> String.replace("T{:", "{<span class=\"c-mod\">:</span><span class=\"c-tup\">")
-     |> String.replace("T, :", "</span>, <span class=\"c-mod\">:</span><span class=\"c-tup\">")
-     |> String.replace("}T", "</span>}")
+    |> String.replace("T{:", "{<span class=\"c-mod\">:</span><span class=\"c-tup\">")
+    |> String.replace("T, :", "</span>, <span class=\"c-mod\">:</span><span class=\"c-tup\">")
+    |> String.replace("}T", "</span>}")
   end
 end

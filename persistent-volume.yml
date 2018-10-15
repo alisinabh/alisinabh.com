@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alisinabh-blog-pvc
+  labels:
+    app: alisinabh-blog-app
+spec:
+  storageClassName: normal-rbd
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

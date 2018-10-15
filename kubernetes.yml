@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alisinabh-blog
+  labels:
+    app: alisinabh-blog-app
+spec:
+  ports:
+  - name: web
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+  selector:
+    app: alisinabh-blog-app
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  name: alisinabh-blog
+  labels:
+    app: alisinabh-blog-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alisinabh-blog-app
+        tier: front
+    spec:
+      containers:
+      - name: alisinabh-blog-container
+        image: localhost.k8s1-aec.local:30317/alisinabh_blog:v0.0.7-1
+        ports:
+        - containerPort: 80
+        env:
+        - name: "ADMIN_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: alisinabh-blog-secrets
+              key: admin-user
+        - name: "ADMIN_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: alisinabh-blog-secrets
+              key: admin-password
+        - name: "SECRET_BASE"
+          valueFrom:
+            secretKeyRef:
+              name: alisinabh-blog-secrets
+              key: secret-base
+        volumeMounts:
+        - name: repo-data
+          mountPath: /repo
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+      volumes:
+      - name: repo-data
+        persistentVolumeClaim:
+          claimName: alisinabh-blog-pvc
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: alisinabh-blog
+  labels:
+    app: alisinabh-blog-app
+spec:
+  rules:
+  - host: alisinabh.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: alisinabh-blog
+          servicePort: web
+  - host: www.alisinabh.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: alisinabh-blog
+          servicePort: web
+
